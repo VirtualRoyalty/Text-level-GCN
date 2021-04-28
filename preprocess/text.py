@@ -1,11 +1,13 @@
 import os
 import re
+import nltk
 import numpy as np
 
 from tqdm import tqdm
 from collections import Counter
 from collections import defaultdict
 from nltk.tokenize import word_tokenize
+nltk.download('punkt')
 
 
 class StringProcessor(object):
@@ -96,24 +98,23 @@ class StringProcessor(object):
 
 class CorpusProcessor:
     def __init__(self,
-                 df,
-                 save_path,
+                 save_path=None,
                  pipeline=['clean',
                            'remove_stopword',
                            'normalize',
                            'remove_short'],
                  encoding=None):
         self.save_path = save_path
-        self.df = df
         self.pipeline = pipeline
         self.encoding = encoding
         self.processor = StringProcessor()
 
     def run(self):
-        self.clean_text()
+        self.preprocess()
         self.save()
 
-    def clean_text(self):
+    def preprocess(self, df):
+        self.df = df
 
         clean_text_lst = []
         for indx in tqdm(range(len(self.df)), desc="processing", position=0):
@@ -134,5 +135,3 @@ class CorpusProcessor:
     def save(self):
         self.df.to_csv(self.save_path)
         return
-
-    from tqdm.notebook import tqdm
