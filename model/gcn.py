@@ -17,6 +17,7 @@ class GCN:
                VOCAB_SIZE,
                EMB_SIZE,
                NUM_CLASSES,
+               MAX_NODES,
                FIRST_CONV_SIZE,
                FIRST_CONV_ACTIVATION,
                DROPOUT_RATE,
@@ -27,14 +28,14 @@ class GCN:
                POOLING,
                BATCH_NORM,
                PRETRAINED,
-               pretrained_weights=pretrained_weights,
+               pretrained_weights=None,
                **kwargs):
 
     self.lr_first_update = LR_FIRST_UPDATE
     self.lr_update_per_epoch = LR_UPDATE_PER
 
-    n_node_features = train_spektral.n_node_features  # Dimension of node features
-    n_out = train_spektral.n_labels                   # Dimension of the target
+    n_node_features = 1 #train_spektral.n_node_features  # Dimension of node features
+    n_out = NUM_CLASSES # train_spektral.n_labels                   # Dimension of the target
 
     X_in = Input(shape=(MAX_NODES, n_node_features), name="Nodes_input")
     A_in = Input(shape=(MAX_NODES, MAX_NODES), sparse=True, name='Adj_input')

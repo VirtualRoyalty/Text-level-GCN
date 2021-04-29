@@ -9,8 +9,8 @@ from nltk.tokenize import word_tokenize
 def build_vocab(corpus, min_tf=5, max_tf=1000, pad_token='PAD', master_node=False, master_token='MASTER_NODE'):
     term2freq = {}
 
-    for doc in tqdm_notebook(corpus):
-      tokens = word_tokenize(doc)
+    for tokens in tqdm_notebook(corpus):
+      # tokens = word_tokenize(doc)
       for token in tokens:
         if token in term2freq:
           term2freq[token] += 1

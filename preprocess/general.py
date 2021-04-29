@@ -66,8 +66,7 @@ def get_dataset_from_df(df,
   return X_adj, X_emb, Y
 
 
-from spektral.transforms import GCNFilter, AdjToSpTensor
-
+from spektral.data import BatchLoader, Dataset, Graph,  PackedBatchLoader
 
 class CustomDataset(Dataset):
 
