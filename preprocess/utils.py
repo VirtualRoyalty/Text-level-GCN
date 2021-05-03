@@ -38,8 +38,8 @@ def build_vocab(corpus, min_tf=5, max_tf=1000, pad_token='PAD', master_node=Fals
 
     return vocab_terms, term2id
 
-def get_max_nodes(df, token_col='tokens', quantile=0.95, master_node=False):
-    df['n_unique'] = df[token_col].apply(lambda x: len(set(x)))
+def get_max_nodes(df, term2id, token_col='tokens', quantile=0.95, master_node=False):
+    df['n_unique'] = df[token_col].apply(lambda x: len([term for term in set(x) if term in term2id]))
     max_nodes = int(df['n_unique'].quantile(quantile))
     if master_node:
       max_nodes += 1
