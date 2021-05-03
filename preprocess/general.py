@@ -53,7 +53,7 @@ def get_dataset_from_df(df,
                         token_col='tokens',
                         label_col='label',
                         pmi_matrix=None,
-                        is_directed=is_directed,
+                        is_directed=True,
                         is_weighted_edges=is_weighted_edges,
                         infranodus_weights=False):
 
