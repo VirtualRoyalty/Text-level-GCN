@@ -6,17 +6,28 @@ from tqdm import tqdm, tqdm_notebook
 from preprocess.graph import doc2graph
 
 
-def prepare2gcn(doc, max_nodes, window_size, term2id, MASTER_NODE=False, pmi_matrix=None):
+def prepare2gcn(doc,
+                max_nodes,
+                window_size,
+                term2id,
+                is_directed=True,
+                is_weighted_edges=False,
+                infranodus_weights=False,
+                MASTER_NODE=False,
+                pmi_matrix=None):
 
     #   doc = doc[-max_nodes:] #doc[:max_nodes]
     # assert len(set(doc)) <= max_nodes
 
     doc = [token for token in doc if token in term2id]
-    if pmi_matrix is not None:
-      G = doc2graph(doc, max_nodes=max_nodes, window_size=window_size, term2id=term2id, pmi_matrix=pmi_matrix)
-    else:
-      G = doc2graph(doc, max_nodes=max_nodes, window_size=window_size)
-
+    G = doc2graph(doc,
+                  max_nodes=max_nodes,
+                  window_size=window_size,
+                  term2id=term2id,
+                  pmi_matrix=pmi_matrix,
+                  is_directed=is_directed,
+                  is_weighted_edges=is_weighted_edges,
+                  infranodus_weights=False)
     A = nx.adjacency_matrix(G).todense()
     padded = np.zeros((max_nodes, max_nodes),  dtype='float32')
     padded[:A.shape[0], :A.shape[1]] = A
@@ -41,16 +52,24 @@ def get_dataset_from_df(df,
                         window_size=3,
                         token_col='tokens',
                         label_col='label',
-                        pmi_matrix=None):
-  X_adj, X_emb, Y = [], [],  []
+                        pmi_matrix=None,
+                        is_directed=is_directed,
+                        is_weighted_edges=is_weighted_edges,
+                        infranodus_weights=False)):
+
+  X_adj, X_emb, Y = list(), list(),  list()
   for i in tqdm_notebook(range(len(df))):
     tokens  = df[token_col].iloc[i]
     target  = df[label_col].iloc[i]
     if len(tokens) > 1:
-      if pmi_matrix is not None:
-        A, embs = prepare2gcn(tokens, max_nodes=max_nodes, window_size=window_size, term2id=term2id, pmi_matrix=pmi_matrix)
-      else:
-        A, embs = prepare2gcn(tokens, max_nodes=max_nodes, window_size=window_size, term2id=term2id)
+        A, embs = prepare2gcn(tokens,
+                              max_nodes=max_nodes,
+                              window_size=window_size,
+                              term2id=term2id,
+                              pmi_matrix=pmi_matrix,
+                              is_directed=is_directed,
+                              is_weighted_edges=is_weighted_edges,
+                              infranodus_weights=False))
       if pmi_matrix is not None:
         np.fill_diagonal(A, 1)
       X_adj.append(A.astype('float32'))

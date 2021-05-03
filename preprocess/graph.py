@@ -43,7 +43,7 @@ def doc2graph(doc,
         except IndexError:
             if not G.has_node(term):
                 G.add_node(term)
-                G.node[term]['count'] = 1
+                G.nodes[term]['count'] = 1
             else:
                 G.nodes[term]['count'] += 1
         except:

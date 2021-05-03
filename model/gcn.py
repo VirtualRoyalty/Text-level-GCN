@@ -30,13 +30,14 @@ class GCN:
                BATCH_NORM,
                PRETRAINED,
                pretrained_weights=None,
+               INPUT_NODE_FEATURES_SIZE=1,
                **kwargs):
 
     self.lr_first_update = LR_FIRST_UPDATE
     self.lr_update_per_epoch = LR_UPDATE_PER
 
-    n_node_features = 1 #train_spektral.n_node_features  # Dimension of node features
-    n_out = NUM_CLASSES # train_spektral.n_labels                   # Dimension of the target
+    n_node_features = INPUT_NODE_FEATURES_SIZE # Dimension of node features
+    n_out = NUM_CLASSES # Dimension of the target
 
     X_in = Input(shape=(MAX_NODES, n_node_features), name="Nodes_input")
     A_in = Input(shape=(MAX_NODES, MAX_NODES), sparse=True, name='Adj_input')
