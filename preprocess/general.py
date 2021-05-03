@@ -70,11 +70,11 @@ def get_dataset_from_df(df,
                               is_directed=is_directed,
                               is_weighted_edges=is_weighted_edges,
                               infranodus_weights=False)
-      if pmi_matrix is not None:
+    if pmi_matrix is not None:
         np.fill_diagonal(A, 1)
-      X_adj.append(A.astype('float32'))
-      X_emb.append(embs.astype('int32'))
-      Y.append(target)
+    X_adj.append(A.astype('float32'))
+    X_emb.append(embs.astype('int32'))
+    Y.append(target)
 
   X_adj = np.array(X_adj, dtype='float32')
   X_emb = np.array(X_emb, dtype='int32')
