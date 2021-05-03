@@ -54,7 +54,7 @@ def get_dataset_from_df(df,
                         label_col='label',
                         pmi_matrix=None,
                         is_directed=True,
-                        is_weighted_edges=is_weighted_edges,
+                        is_weighted_edges=False,
                         infranodus_weights=False):
 
   X_adj, X_emb, Y = list(), list(),  list()
