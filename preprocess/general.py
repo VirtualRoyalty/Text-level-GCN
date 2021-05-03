@@ -69,7 +69,7 @@ def get_dataset_from_df(df,
                               pmi_matrix=pmi_matrix,
                               is_directed=is_directed,
                               is_weighted_edges=is_weighted_edges,
-                              infranodus_weights=False))
+                              infranodus_weights=False)
       if pmi_matrix is not None:
         np.fill_diagonal(A, 1)
       X_adj.append(A.astype('float32'))
