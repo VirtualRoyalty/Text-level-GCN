@@ -55,7 +55,7 @@ def get_dataset_from_df(df,
                         pmi_matrix=None,
                         is_directed=is_directed,
                         is_weighted_edges=is_weighted_edges,
-                        infranodus_weights=False)):
+                        infranodus_weights=False):
 
   X_adj, X_emb, Y = list(), list(),  list()
   for i in tqdm_notebook(range(len(df))):
