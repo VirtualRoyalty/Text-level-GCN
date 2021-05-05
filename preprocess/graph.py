@@ -46,6 +46,4 @@ def doc2graph(doc,
                     G.nodes[term]['count'] = 1
                 else:
                     G.nodes[term]['count'] += 1
-        except:
-            raise
     return G
