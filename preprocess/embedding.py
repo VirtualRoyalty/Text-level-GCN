@@ -20,13 +20,13 @@ class Embedding(ABC):
 
 class Glove(Embedding):
 
-    def __init__(weights_path):
+    def __init__(self, weights_path):
         self.weights_path = weights_path
         self.name = 'GloVe'
         self.embeddings_index = {}
         self.load()
 
-    def load():
+    def load(self):
         f = open(self.weights_path, encoding="utf-8")
         for line in f:
             values = line.split()
@@ -35,25 +35,25 @@ class Glove(Embedding):
             self.embeddings_index[word] = coefs
         f.close()
 
-    def get(token):
+    def get(self, token):
         return self.embeddings_index.get(token)
 
-    def name():
+    def name(self):
         return self.name
 
 
 class FastText(Embedding):
 
-    def __init__(weights_path):
+    def __init__(self, weights_path):
         self.weights_path = weights_path
         self.name = 'FastText'
         self.load()
 
-    def load():
+    def load(self):
         self.fbkv = fasttext.load_model(self.weights_path)
 
-    def get(token):
+    def get(self, token):
         return self.fbkv.get_word_vector(token)
 
-    def name():
+    def name(self):
         return self.name
