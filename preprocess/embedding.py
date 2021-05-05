@@ -38,6 +38,9 @@ class Glove(Embedding):
     def get(token):
         return self.embeddings_index.get(token)
 
+    def name():
+        return self.name
+
 
 class FastText(Embedding):
 
@@ -51,3 +54,6 @@ class FastText(Embedding):
 
     def get(token):
         return self.fbkv.get_word_vector(token)
+
+    def name():
+        return self.name
