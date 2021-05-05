@@ -72,4 +72,4 @@ class FastText(Embedding):
 
     @property
     def size(self):
-        return fbkv.size()
+        return self.fbkv.get_dimension()
