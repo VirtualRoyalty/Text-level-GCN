@@ -37,6 +37,7 @@ class Glove(Embedding):
             word = values[0]
             coefs = np.asarray(values[1:], dtype='float32')
             self.embeddings_index[word] = coefs
+        self.emb_size = coefs.shape[-1]
         f.close()
         print('loaded')
 
@@ -49,7 +50,7 @@ class Glove(Embedding):
 
     @property
     def size(self):
-        return self.embeddings_index.shape[-1]
+        return self.emb_size
 
 class FastText(Embedding):
 
