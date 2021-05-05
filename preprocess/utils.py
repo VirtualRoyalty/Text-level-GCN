@@ -6,6 +6,36 @@ from tqdm import tqdm, tqdm_notebook
 from nltk.tokenize import word_tokenize
 
 
+
+def get_pretrained_weights(emb_model,
+                           vocab_terms,
+                           pad_token='PAD',
+                           master_node=False,
+                           master_node_token='MASTER_NODE',
+                           oov_weights_init='zeros',
+                           dtype='float32'):
+    pretrained_weights = []
+    out_of_vocab_lst = []
+
+    vocab_terms = vocab_terms.append(pad_token)
+    if master_node:
+        vocab_terms = vocab_terms.append(master_node_token)
+
+    for i, term in tqdm_notebook(enumerate(vocab_terms)):
+        try:
+            pretrained_weights.append(emb_model.get(term))
+        except:
+            out_of_vocab_lst.append(term)
+            if oov_weights_init == 'zeros':
+                pretrained_weights.append(np.zeros(200, dtype=dtype))
+            elif oov_weights_init == 'random'
+                pretrained_weights.append(np.random.random(200, dtype=dtype))
+            else:
+                pretrained_weights.append(np.zeros(200, dtype=dtype))
+    pretrained_weights = np.array(pretrained_weights, dtype=dtype)
+    return pretrained_weights, out_of_vocabs
+
+
 def build_vocab(corpus, min_tf=5, max_tf=1000, pad_token='PAD', master_node=False, master_token='MASTER_NODE'):
     term2freq = {}
 
