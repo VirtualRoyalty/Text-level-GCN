@@ -16,6 +16,7 @@ def get_pretrained_weights(emb_model,
                            dtype='float32'):
     pretrained_weights = []
     out_of_vocab_lst = []
+    emb_size = emb_model.size()
 
     vocab_terms.append(pad_token)
     if master_node:
@@ -27,11 +28,11 @@ def get_pretrained_weights(emb_model,
         except:
             out_of_vocab_lst.append(term)
             if oov_weights_init == 'zeros':
-                pretrained_weights.append(np.zeros(200, dtype=dtype))
+                pretrained_weights.append(np.zeros(emb_size, dtype=dtype))
             elif oov_weights_init == 'random':
-                pretrained_weights.append(np.random.random(200, dtype=dtype))
+                pretrained_weights.append(np.random.random(emb_size, dtype=dtype))
             else:
-                pretrained_weights.append(np.zeros(200, dtype=dtype))
+                pretrained_weights.append(np.zeros(emb_size, dtype=dtype))
     pretrained_weights = np.array(pretrained_weights, dtype=dtype)
     return pretrained_weights, out_of_vocabs
 

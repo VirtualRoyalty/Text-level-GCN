@@ -17,6 +17,10 @@ class Embedding(ABC):
     def name(self):
         raise NotImplementedError(not_impl_mes)
 
+    @abstractproperty
+    def size(self):
+        raise NotImplementedError(not_impl_mes)
+
 
 class Glove(Embedding):
 
@@ -41,8 +45,11 @@ class Glove(Embedding):
 
     @property
     def name(self):
-        return self.name
+        return 'GloVE'
 
+    @property
+    def size(self):
+        return self.embeddings_index.shape[-1]
 
 class FastText(Embedding):
 
@@ -60,4 +67,8 @@ class FastText(Embedding):
 
     @property
     def name(self):
-        return self.name
+        return 'FastText'
+
+    @property
+    def size(self):
+        return fbkv.size()
