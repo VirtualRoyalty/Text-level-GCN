@@ -22,11 +22,11 @@ class Glove(Embedding):
 
     def __init__(self, weights_path):
         self.weights_path = weights_path
-        self.name = 'GloVe'
         self.embeddings_index = {}
         self.load()
 
     def load(self):
+        print('loading...')
         f = open(self.weights_path, encoding="utf-8")
         for line in f:
             values = line.split()
@@ -34,6 +34,7 @@ class Glove(Embedding):
             coefs = np.asarray(values[1:], dtype='float32')
             self.embeddings_index[word] = coefs
         f.close()
+        print('loaded')
 
     def get(self, token):
         return self.embeddings_index.get(token)
@@ -47,11 +48,12 @@ class FastText(Embedding):
 
     def __init__(self, weights_path):
         self.weights_path = weights_path
-        self.name = 'FastText'
         self.load()
 
     def load(self):
+        print('loading...')
         self.fbkv = fasttext.load_model(self.weights_path)
+        print('loaded')
 
     def get(self, token):
         return self.fbkv.get_word_vector(token)
