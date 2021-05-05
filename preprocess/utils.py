@@ -33,6 +33,7 @@ def get_pretrained_weights(emb_model,
                 pretrained_weights.append(np.random.random(emb_size, dtype=dtype))
             else:
                 pretrained_weights.append(np.zeros(emb_size, dtype=dtype))
+        pretrained_weights[-1].shape
     pretrained_weights = np.array(pretrained_weights, dtype=dtype)
     return pretrained_weights, out_of_vocabs
 
