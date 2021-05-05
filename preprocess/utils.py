@@ -16,7 +16,7 @@ def get_pretrained_weights(emb_model,
                            dtype='float32'):
     pretrained_weights = []
     out_of_vocab_lst = []
-    emb_size = emb_model.size()
+    emb_size = emb_model.size
 
     vocab_terms.append(pad_token)
     if master_node:
