@@ -33,9 +33,8 @@ def get_pretrained_weights(emb_model,
                 pretrained_weights.append(np.random.random(emb_size, dtype=dtype))
             else:
                 pretrained_weights.append(np.zeros(emb_size, dtype=dtype))
-        pretrained_weights[-1].shape
     pretrained_weights = np.array(pretrained_weights, dtype=dtype)
-    return pretrained_weights, out_of_vocabs
+    return pretrained_weights, out_of_vocab_lst
 
 
 def build_vocab(corpus, min_tf=5, max_tf=1000, pad_token='PAD', master_node=False, master_token='MASTER_NODE'):
