@@ -42,7 +42,7 @@ class Glove(Embedding):
         print('loaded')
 
     def get(self, token):
-        return self.embeddings_index.get(token)
+        return self.embeddings_index[token]
 
     @property
     def name(self):
