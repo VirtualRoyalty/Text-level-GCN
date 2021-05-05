@@ -17,9 +17,9 @@ def get_pretrained_weights(emb_model,
     pretrained_weights = []
     out_of_vocab_lst = []
 
-    vocab_terms = vocab_terms.append(pad_token)
+    vocab_terms.append(pad_token)
     if master_node:
-        vocab_terms = vocab_terms.append(master_node_token)
+        vocab_terms.append(master_node_token)
 
     for i, term in tqdm_notebook(enumerate(vocab_terms)):
         try:
