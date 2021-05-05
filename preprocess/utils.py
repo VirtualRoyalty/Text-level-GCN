@@ -28,9 +28,10 @@ def get_pretrained_weights(emb_model,
         except:
             out_of_vocab_lst.append(term)
             if oov_weights_init == 'zeros':
-                pretrained_weights.append(np.zeros(emb_size, dtype=dtype))
+                pretrained_weights.append(emb_model.get('the'))
             elif oov_weights_init == 'random':
-                pretrained_weights.append(np.random.random(emb_size, dtype=dtype))
+                rand_vec = np.random.random(emb_size)
+                pretrained_weights.append(rand_vec / sum(rand_vec))
             else:
                 pretrained_weights.append(np.zeros(emb_size, dtype=dtype))
     pretrained_weights = np.array(pretrained_weights, dtype=dtype)
