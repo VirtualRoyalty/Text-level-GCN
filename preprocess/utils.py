@@ -28,7 +28,7 @@ def get_pretrained_weights(emb_model,
             out_of_vocab_lst.append(term)
             if oov_weights_init == 'zeros':
                 pretrained_weights.append(np.zeros(200, dtype=dtype))
-            elif oov_weights_init == 'random'
+            elif oov_weights_init == 'random':
                 pretrained_weights.append(np.random.random(200, dtype=dtype))
             else:
                 pretrained_weights.append(np.zeros(200, dtype=dtype))
