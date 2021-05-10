@@ -129,6 +129,7 @@ class Experiment:
                   'PMI': PMI,
                   'MIN_TF': MIN_TF,
                   'MAX_TF': MAX_TF,
+                  'IS_DIRECTED': IS_DIRECTED
           }
         model = ModelClass(pretrained_weights=pretrained_weights, **params)
         params['MODEL_PARAMS'] = model.model.count_params()

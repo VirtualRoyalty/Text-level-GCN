@@ -83,6 +83,7 @@ class GCN:
       X_1 = GlobalAttentionPool(channels=150, kernel_regularizer=l2(0.0001), name='Pooling')(X_1)
     elif POOLING == 'SortPool':
       X_1 = SortPool(100)(X_1)
+    else:
       X_1 = GlobalSumPool(name='Pooling')(X_1)
 
     # else:
