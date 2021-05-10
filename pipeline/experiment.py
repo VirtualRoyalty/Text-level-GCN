@@ -36,7 +36,7 @@ class Experiment:
             MAX_TF,
             MASTER_NODE,
             MAX_NODES_QUANTILE,
-            MODEL_TYPE',
+            MODEL_TYPE,
             PRETRAINED,
             EMB_TYPE=None,
             BATCH_SIZE=32,
