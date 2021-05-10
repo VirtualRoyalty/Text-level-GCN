@@ -27,6 +27,7 @@ class Experiment:
             EMB_SIZE,
             FIRST_CONV_SIZE,
             WINDOW_SIZE,
+            IS_DIRECTED,
             DROPOUT_RATE,
             L2_RATE,
             LR,
@@ -80,12 +81,14 @@ class Experiment:
                                                                          MAX_NODES,
                                                                          window_size=WINDOW_SIZE,
                                                                          term2id=term2id,
+                                                                         is_directed=IS_DIRECTED,
                                                                         )
 
         X_adj_test, X_emb_test, Y_test = pgeneral.get_dataset_from_df(X_test_df,
                                                                       MAX_NODES,
                                                                       window_size=WINDOW_SIZE,
                                                                       term2id=term2id,
+                                                                      is_directed=IS_DIRECTED,
                                                                     )
         gc.collect()
 
