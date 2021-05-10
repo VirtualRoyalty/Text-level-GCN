@@ -101,20 +101,6 @@ class Experiment:
 
 
         NUM_CLASSES =  train_spektral.n_labels
-
-        model = ModelClass(pretrained_weights=pretrained_weights, **params)
-        train_loader = BatchLoader(train_spektral, batch_size=BATCH_SIZE)
-        test_loader = BatchLoader(test_spektral, batch_size=BATCH_SIZE)
-        lr_scheduler = keras.callbacks.LearningRateScheduler(model.scheduler)
-        early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=PATIENCE)
-
-        callbacks = [lr_scheduler, early_stop]
-        if DRAW:
-            plot_losses = putils.PlotLosses()
-            callbacks.append(plot_losses)
-        if NEPTUNE:
-            callbacks.append(NeptuneMonitor())
-
         params = {
                   'MAX_NODES': MAX_NODES,
                   'VOCAB_SIZE': len(vocab_terms),
@@ -140,8 +126,23 @@ class Experiment:
                   'MIN_TF': MIN_TF,
                   'MAX_TF': MAX_TF,
           }
+        model = ModelClass(pretrained_weights=pretrained_weights, **params)
         params['MODEL_PARAMS'] = model.model.count_params()
         params['LAYERS'] = [layer.name for layer in model.model.layers]
+        train_loader = BatchLoader(train_spektral, batch_size=BATCH_SIZE)
+        test_loader = BatchLoader(test_spektral, batch_size=BATCH_SIZE)
+        lr_scheduler = keras.callbacks.LearningRateScheduler(model.scheduler)
+        early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=PATIENCE)
+
+        callbacks = [lr_scheduler, early_stop]
+        if DRAW:
+            plot_losses = putils.PlotLosses()
+            callbacks.append(plot_losses)
+        if NEPTUNE:
+            callbacks.append(NeptuneMonitor())
+
+
+
         if NEPTUNE:
             neptune.create_experiment(NAME, params=params, tags=tags)
 
