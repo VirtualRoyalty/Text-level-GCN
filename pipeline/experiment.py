@@ -30,7 +30,7 @@ class Experiment:
             MAX_NODES_QUANTILE=1.0,
             WINDOW_SIZE=3,
             MODEL_TYPE='GCN',
-            PMI=False
+            PMI=False,
             EMB_TYPE=None,
             BATCH_SIZE=32,
             PATIENCE=10,
