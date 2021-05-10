@@ -142,7 +142,6 @@ class Experiment:
           }
         params['MODEL_PARAMS'] = model.model.count_params()
         params['LAYERS'] = [layer.name for layer in model.model.layers]
-
         if NEPTUNE:
             neptune.create_experiment(NAME, params=params, tags=tags)
 
@@ -155,4 +154,4 @@ class Experiment:
                         verbose=0
                   )
         neptune.stop()
-        return
+        return params
