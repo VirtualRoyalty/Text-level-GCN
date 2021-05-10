@@ -101,7 +101,7 @@ class Experiment:
         early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=PATIENCE)
 
 
-        callbacks = list(lr_scheduler, early_stop)
+        callbacks = [lr_scheduler, early_stop]
         if DRAW:
             plot_losses = putils.PlotLosses()
             callbacks.append(plot_losses)
