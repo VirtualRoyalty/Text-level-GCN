@@ -122,6 +122,7 @@ class Experiment:
                   'MASTER_NODE': MASTER_NODE,
                   'CONV_TYPE': MODEL_TYPE,
                   'BATCH_NORM': BATCH_NORM,
+                  'MAX_NODES_QUANTILE':MAX_NODES_QUANTILE,
                   'PMI': PMI,
                   'MIN_TF': MIN_TF,
                   'MAX_TF': MAX_TF,
