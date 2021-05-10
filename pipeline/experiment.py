@@ -24,21 +24,29 @@ class Experiment:
             model,
             X_train_df,
             X_test_df,
-            MIN_TF=1,
-            MAX_TF=2500,
-            MASTER_NODE=False,
-            MAX_NODES_QUANTILE=1.0,
-            WINDOW_SIZE=3,
-            MODEL_TYPE='GCN',
-            PMI=False,
+            EMB_SIZE,
+            FIRST_CONV_SIZE,
+            WINDOW_SIZE,
+            DROPOUT_RATE,
+            L2_RATE,
+            LR,
+            LR_FIRST_UPDATE,
+            LR_UPDATE_PER,
+            MIN_TF,
+            MAX_TF,
+            MASTER_NODE,
+            MAX_NODES_QUANTILE,
+            MODEL_TYPE',
+            PRETRAINED,
             EMB_TYPE=None,
             BATCH_SIZE=32,
+            BATCH_NORM=False,
+            PMI=False,
             PATIENCE=10,
             EPOCH=100,
             DRAW=False,
             NEPTUNE=True,
             pretrained_weights=None,
-            params=None,
             **kwargs
             ):
 
@@ -93,8 +101,6 @@ class Experiment:
 
 
         NUM_CLASSES =  train_spektral.n_labels
-
-
         train_loader = BatchLoader(train_spektral, batch_size=BATCH_SIZE)
         test_loader = BatchLoader(test_spektral, batch_size=BATCH_SIZE)
         lr_scheduler = keras.callbacks.LearningRateScheduler(model.scheduler)
@@ -109,6 +115,31 @@ class Experiment:
             callbacks.append(NeptuneMonitor())
 
         model = model_gcn.GCN(pretrained_weights=pretrained_weights, **params)
+        params = {
+                  'MAX_NODES': MAX_NODES,
+                  'VOCAB_SIZE': len(vocab_terms),
+                  'EMB_SIZE': EMB_SIZE,
+                  'NUM_CLASSES': NUM_CLASSES,
+                  'FIRST_CONV_SIZE': FIRST_CONV_SIZE,
+                  'FIRST_CONV_ACTIVATION': 'relu',
+                  'DROPOUT_RATE': DROPOUT_RATE,
+                  'L2_RATE': L2_RATE,
+                  'LR': LR,
+                  'LR_FIRST_UPDATE': LR_FIRST_UPDATE,
+                  'LR_UPDATE_PER': LR_UPDATE_PER,
+                  'PRETRAINED': PRETRAINED,
+                  'PRETRAINED_EMB': EMB_TYPE,
+                  'POOLING': 'GlobalSum',
+                  'WINDOW_SIZE': WINDOW_SIZE,
+                  'EPOCH': EPOCH,
+                  'BATCH_SIZE': BATCH_SIZE,
+                  'MASTER_NODE': MASTER_NODE,
+                  'CONV_TYPE': MODEL_TYPE,
+                  'BATCH_NORM': BATCH_NORM,
+                  'PMI': PMI,
+                  'MIN_TF': MIN_TF,
+                  'MAX_TF': MAX_TF,
+          }
         params['MODEL_PARAMS'] = model.model.count_params()
         params['LAYERS'] = [layer.name for layer in model.model.layers]
 
@@ -124,5 +155,4 @@ class Experiment:
                         verbose=0
                   )
         neptune.stop()
-
         return
