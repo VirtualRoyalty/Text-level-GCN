@@ -114,7 +114,7 @@ class Experiment:
         if NEPTUNE:
             callbacks.append(NeptuneMonitor())
 
-        model = model_gcn.ModelClass(pretrained_weights=pretrained_weights, **params)
+        model = ModelClass(pretrained_weights=pretrained_weights, **params)
         params = {
                   'MAX_NODES': MAX_NODES,
                   'VOCAB_SIZE': len(vocab_terms),
