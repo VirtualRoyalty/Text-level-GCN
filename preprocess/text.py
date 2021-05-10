@@ -50,7 +50,7 @@ class StringProcessor(object):
             if token.is_space or token.is_punct:
                 continue
             if token.is_digit:
-                token = "[num]"
+                token = "<num>"
             else:
                 token =  token.lemma_ # lemmatizer.lemmatize(token.text) #
 
