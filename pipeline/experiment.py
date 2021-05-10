@@ -101,10 +101,7 @@ class Experiment:
 
 
         NUM_CLASSES =  train_spektral.n_labels
-        train_loader = BatchLoader(train_spektral, batch_size=BATCH_SIZE)
-        test_loader = BatchLoader(test_spektral, batch_size=BATCH_SIZE)
-        lr_scheduler = keras.callbacks.LearningRateScheduler(model.scheduler)
-        early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=PATIENCE)
+
 
 
         callbacks = [lr_scheduler, early_stop]
@@ -115,6 +112,11 @@ class Experiment:
             callbacks.append(NeptuneMonitor())
 
         model = ModelClass(pretrained_weights=pretrained_weights, **params)
+        train_loader = BatchLoader(train_spektral, batch_size=BATCH_SIZE)
+        test_loader = BatchLoader(test_spektral, batch_size=BATCH_SIZE)
+        lr_scheduler = keras.callbacks.LearningRateScheduler(model.scheduler)
+        early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=PATIENCE)
+        
         params = {
                   'MAX_NODES': MAX_NODES,
                   'VOCAB_SIZE': len(vocab_terms),
