@@ -16,5 +16,5 @@ Source code of the final course paper "Enhancing Word Embeddings with Graph-Base
 | R8      |            97.4 |           97.6 |           97.2 |            0.1 |
 | ohsumed |            68.9 |           69.7 |           68.5 |            0.3 |
 
-![text graph](img/text_doc_graph.png)
+
 ![tsne_ohsumed](img/ohsumed_tsne.png)
