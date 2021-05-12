@@ -2,8 +2,10 @@
 Source code of the final course paper "Enhancing Word Embeddings with Graph-Based Text Representations"
 
 
-![text graph](img/text_doc_graph.png)
-![text graph](img/ohsumed_tsne_predicted.png)
+  ![text graph](img/text_doc_graph.png)
+
+
+![text graph](img/ohsumed_tsne.png)
 
 | Name    |   accuracy_mean |   accuracy_max |   accuracy_min |   accuracy_std |
 |:--------|----------------:|---------------:|---------------:|---------------:|
