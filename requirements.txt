@@ -1,9 +1,9 @@
 sklearn
 networkx==2.5.1
-tensorflow==2.4.1
+tensorflow
 Keras==2.4.3
 spektral==1.0.6
 nltk==3.2.5
-neptune-client==0.4.132
-neptune-contrib==0.25.0
+neptune-client
+neptune-contrib
 fasttext

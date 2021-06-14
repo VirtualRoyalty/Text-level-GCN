@@ -5,7 +5,7 @@ from tensorflow.keras import layers, Input
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Embedding, Reshape, BatchNormalization, Lambda
 
-from keras.regularizers import l2
+from tensorflow.keras.regularizers import l2
 
 from spektral.layers import GCNConv
 from spektral.layers import GlobalSumPool, GlobalMaxPool,  GlobalAvgPool , GlobalAttentionPool, GlobalAttnSumPool

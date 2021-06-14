@@ -1,5 +1,4 @@
 import gc
-import keras
 import tensorflow as tf
 from spektral.data import BatchLoader
 from spektral.transforms import GCNFilter, AdjToSpTensor
@@ -136,7 +135,7 @@ class Experiment:
         params['LAYERS'] = [layer.name for layer in model.model.layers]
         train_loader = BatchLoader(train_spektral, batch_size=BATCH_SIZE)
         test_loader = BatchLoader(test_spektral, batch_size=BATCH_SIZE)
-        lr_scheduler = keras.callbacks.LearningRateScheduler(model.scheduler)
+        lr_scheduler = tf.keras.callbacks.LearningRateScheduler(model.scheduler)
         early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=PATIENCE)
 
         callbacks = [lr_scheduler, early_stop]
